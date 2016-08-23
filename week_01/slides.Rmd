@@ -21,13 +21,14 @@ output:
 
 <ol style="color: white">
   <li>Fork the lab repo from <a href="https://github.com/agron590-ISU/lab" target=_blank style="color:black">https://github.com/agron590-ISU/lab</a></li>
-  <li>Edit the repo in some way.</li>
+  <li>Edit the repo in some way.
   <ul>
   <li>Ideas: Edit the readme, add a new file in the 01 folder, edit these slides, go nuts!</li>
-  </ul>
+  </ul></li>
   <li>Create a pull request with your changes.</li>
 </ol>
+> - ![everything_is_fine](images/everything_is_fine.png)
 
-##
+## Our repo
 
 ![panda-monium](images/pandemonium.gif)
