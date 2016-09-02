@@ -1,0 +1,29 @@
+---
+title: "Collaboration"
+author: "Ranae Dietzel and Andee Kaplan"
+date: "September 2, 2016"
+output: html_document
+---
+
+##Prompt
+
+You study free-living diaztrophs, microbes with can fix nitrogen without a symbiotic relationship with a plant. While at a conference, you meet another scientist who has similar interests, but lives in Ukraine. As you talk, you realize that the soils and agriculture in Iowa and Ukraine have many similarities. Then you find out that abundance of the *nif* gene that she measured in the soil of her cornfield is 10 times greater than what you have ever measured in Iowa. You both get excited and strike up a collaboration to try and study the effect of this difference on yield given an identical fertilizer rate.  
+
+As the project progresses, you realize that there are many factors you can control to make the Iowan and Ukrainian field sites similar, but there are many other variables you cannot control and you will have to measure and try to account for their effect through modeling. Each of you quickly recruit soil scientists, crop scientists, meteorologists, and statisticians. You immediatley recognize the need for a data dictionary and start to work with your co-PI to craft one. 
+
+Luckily, your co-PI uses GitHub.  Also, there is enough of a time difference so that you are never working on the same file at the same time. You start by identifiying the following important measured variables: biomass yield, harvest index (grain/biomass), number of seeds per hectare, precipitation, radiation, maximum daily temperature, soil nitrate, *nif* abundance, nitrogenase activity.  
+
+## Instructions  
+Work with a partner to create a data dictionary as if one of you is the PI in Ukraine. The list above is by no means complete, when the file is pushed to you, add a variable or other piece of information and push it back to your collaborator.  
+
+You may want to work in your favorite spreadsheet making software (gasp!). Be sure to save you file(s) as a `.csv` to allow for line by line diffing in GitHub.
+
+
+#### To start  
+1. If you have not yet forked the lab repo, do so.
+1. Sync your fork to the parent remote repo (agron590-ISU/lab)
+1. Create a new repo and add your partner as a collaborator (see **settings** in your repo)
+1. Make a brand new file within this repo and begin to build the dictionary.  
+1. When you are ready, commit your changes and push them to the repo.  
+1. The partner can then pull the file, incorporate their changes, and push back. 
+
