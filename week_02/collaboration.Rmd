@@ -15,7 +15,7 @@ Luckily, your co-PI uses both R Markdown and GitHub.  Also, there is enough of a
 ##Instructions  
 Work with a partner to create a data dictionary as if one of you is the PI in Ukraine. The list above is by no means complete, when the file is pushed to you, add a variable or other piece of information and push it back to your collaborator.  
 
-You may want to copy and paste this to make a table in R markdown:  
+Here is an example of how to make a table in R markdown:  
 
 
 ```{r kable, echo=FALSE}
