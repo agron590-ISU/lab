@@ -15,6 +15,21 @@ Luckily, your co-PI uses both R Markdown and GitHub.  Also, there is enough of a
 ##Instructions  
 Work with a partner to create a data dictionary as if one of you is the PI in Ukraine. The list above is by no means complete, when the file is pushed to you, add a variable or other piece of information and push it back to your collaborator.  
 
+You may want to copy and paste this to make a table in R markdown:  
+
+
+```{r kable, echo=FALSE}
+ourtable <- data.frame(name=c("gyield", "precip", "var3", "var4"),
+                  plot_name=c("Grain Yield", "Precipitation", "Variable 3", "Variable 4"),
+                  group=c("crops", "met", "other", "other"),
+                  description=c("How much grain was produced", "How much it rained during the growing season",
+                                "More things about this",
+                                "And description of that"),
+                  stringsAsFactors=FALSE)
+kable(ourtable)
+```
+
+
 ####To start  
 1) Fork the "lab" repo from our organization's GitHub page.  
 2) Create a new repo within the lab repo and add your partner as a collaborator  
