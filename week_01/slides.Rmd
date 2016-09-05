@@ -10,13 +10,12 @@ output:
 ---
 # Lab 1 - Git going!
 
-## Your Turn { .cover .white }
+## First Option for "Your Turn"" <span style="color: red">
 
-<!-- image source https://www.flickr.com/photos/ollemhebb/16691684354/in/photolist-rqZfeh-dB2HGy-j4rtWV-cswQCb-bnmKUX-rurYD7-5vmdw6-7iHPtj-bvggjZ-7nwAyK-oVZdhD-acwkds-dqAf8f-e4z5Jk-6PBenY-dSAYZ9-5vmcGR-e4z7be-cyGrpE-7WLPaw-5vmdnn-8ciEWU-5vmcDa-o2NbGq-dxpJTW-cyGt4d-dZy9Sm-dZssjK-oVZ3SB-5BtrCp-e4z5Mk-6bvjNs-8cfk5H-dzTiW2-7Yfj3T-9mraHV-5XmJTS-aDtnzj-ruXg4M-ecF3x2-aAU6Fg-bsQosb-Hgh9UM-kJti5g-ifdCE4-ceXXhf-7AdkFZ-aEDYpr-otaizi-sa1Phn -->
-<img src="images/your_turn.jpg" class="cover height">
-
+<img src="images/black-and-white-sunflower.jpg" class="cover height">
+  
 <ol style="color: white">
-  <li>Fork the lab repo from <a href="https://github.com/agron590-ISU/lab" target=_blank style="color:black">https://github.com/agron590-ISU/lab</a></li>
+  <li>Fork the lab repo from <a href="https://github.com/agron590-ISU/lab" target=_blank style="color:yellow">https://github.com/agron590-ISU/lab</a></li>
   <li>Edit the repo in some way.
   <ul>
   <li>Ideas: Edit the readme, add a new file in the 01 folder, edit these slides, go nuts!</li>
@@ -25,6 +24,41 @@ output:
 </ol>
 
 
+
+## Second Option for "Your Turn"" 
+
+
+<img src="images/black-wallpaper-5.jpg" class="cover height">
+  
+<ol style="color: white">
+  <li>Fork the lab repo from <a href="https://github.com/agron590-ISU/lab" target=_blank style="color:yellow">https://github.com/agron590-ISU/lab</a></li>
+  <li>Edit the repo in some way.
+  <ul>
+  <li>Ideas: Edit the readme, add a new file in the 01 folder, edit these slides, go nuts!</li>
+  </ul></li>
+  <li>Create a pull request with your changes.</li>
+  <li> </li>
+  <h3><span style="color:red">Chose whichever option you like more. But, please, do not use that blue background anymore! It's painful to read white text against those bubbles! </h3>
+</ol>
+
+
+
+## How I should do this?
+
+
+  <l>I want to change color of the heading to <span style="color:red">red
+  <span style="color:black">, or <span style="color:orange">orange<span style="color:black">, 
+  or <span style="color:blue">blue<span style="color:black">. 
+  <l>But my attempts are failing.</l>
+  <l></l>
+
+<center>![cannot-do-this-alone](images/cannot_do_this.gif)
+
+
+
+
 ## Our repo
 
 ![panda-monium](images/pandemonium.gif)
+
+
