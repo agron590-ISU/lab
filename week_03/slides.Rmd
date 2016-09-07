@@ -156,5 +156,5 @@ http://www.sqlitetutorial.net
 <li>How many customers does this shop have? Employees?</li>
 <li>One album belongs to one artist. However, one artist may have zero or more albums. Find the artists who do not have any albums by using the LEFT JOIN clause.</li>
 <li>It is mentioned that SQLite does not have the RIGHT JOIN or the FULL OUTER JOIN implemented. Create a workaround for the RIGHT JOIN.</li>
-<li>Create a workaround for the FULL OUTER JOIN using LEFT JOINs.</li>
+<li>(Challenge) Create a workaround for the FULL OUTER JOIN using LEFT JOINs. Hint: requires <a href="http://www.sqlitetutorial.net/sqlite-union/" style="color: black">UNION</a>.</li>
 </ol>
