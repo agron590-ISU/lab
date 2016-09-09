@@ -1,0 +1,160 @@
+---
+title: "SQL"
+author: "Ranae Dietzel & Andee Kaplan"
+ratio: 16x10
+output:
+  rmdshower::shower_presentation:
+    self_contained: false
+    katex: true
+    theme: ribbon
+---
+
+# Return of Relational Databases: The SQL
+
+## Demo DB - chinook
+
+![](images/ChinookDatabaseSchema.png)
+
+## Select
+
+You often use the SELECT statement to query data from one or more table. 
+
+```sql
+select * 
+from artist;
+```
+
+Although the SELECT clause appears before the FROM clause, SQLite evaluates the FROM clause first and then the SELECT clause. Thererefore, you can specify a column or a list of comma-separated columns in the SELECT clause.
+
+```sql
+select 
+  name, 
+  composer, 
+  unitprice
+from track;
+```
+
+## *
+
+- For a table with many columns, you can use the asterisk (*), which is the shorthand for all columns of the table.
+- You should use the asterisk (*) for the testing purpose only, not in the real application development.
+- When you develop an application, you should control what SQLite returns to your application. 
+    - What if somebody deletes a column? Your application could break.
+    - What if somebody adds a column? More data, slower I/O.
+
+
+
+## Filter
+The WHERE clause is an optional clause of the SELECT statement, appearing after the FROM clause. You add a WHERE clause to the SELECT statement to **filter** data returned by the query. 
+
+```sql
+select 
+  name, 
+  composer, 
+  unitprice
+from track
+where unitprice > 1;
+```
+
+When evaluating a SELECT statement with a WHERE clause, SQLite
+
+1. checks the table in the FROM clause.
+2. evaluates the conditions in the WHERE clause to get the correct rows.
+3. makes final result from rows in step 2. with columns in the SELECT clause.
+
+## Arrange
+
+SQLite table stores rows in a table in an unspecified order. If you use the SELECT statement to query data from a table, the order of rows in the result set is unspecified. To sort the result set, you add the ORDER BY clause in the SELECT statement.
+
+```sql
+select 
+  name, 
+  composer, 
+  unitprice
+from track
+order by unitprice, milliseconds desc;
+```
+The ORDER BY clause comes after the FROM clause and allows you to sort the result set based on one or more columns in different orders, ascending (ASC) and descending (DESC).
+
+## Joins
+
+In relational databases, data is often distributed in many related tables. A table is associated with another table using foreign keys. To query data from many tables, we will use **joins**.
+
+There are three types of joins we will focus on:
+
+1. inner joins
+2. left (right) joins
+3. outer joins
+
+Each join type combines data in a different way.
+
+
+## Inner joins
+
+Suppose you have two tables: A and B. A has `a1`, `a2`, and `f` columns. B has `b1`, `b2`, and `f` column. The A table links to the B table using a foreign key column named `f`.
+
+For each row in the A table, the INNER JOIN clause compares the value of the `f` column with the value of the `f` column in the B table. If the value of the `f` column in the A table equals the value of the `f` column in the B table, it combines data from `a1`, `a2`, `b1`, `b2`, columns and includes this row in the result set.
+
+In other words, the INNER JOIN clause returns rows from the A table that has the corresponding row in B table (based on the key `f`).
+
+## Inner joins (cont'd)
+
+<img src=images/inner_join.png width="80%"/>
+
+## Inner joins (cont'd)
+
+Inner joins can be thought of as *intersections* of rows based on a common key.
+
+```sql
+select
+ trackid,
+ name,
+ title
+from
+ track
+inner join album on album.albumid = track.albumid
+where unitprice > 1
+order by unitprice, milliseconds desc;
+```
+
+## Left (right) joins
+
+A LEFT JOIN statement returns a result set that includes
+
+1. Rows in the A table (left table) that have corresponding rows in the B table.
+2. Rows in the A table and the rows in the B table filled with NULL values if the row in the A table does not have any corresponding rows in the B table.
+
+All rows in the A table are included in the result set whether there are matching rows in the B table or not. If you have a WHERE clause in the statement, the search condition in the WHERE clause is applied after the matching of the LEFT JOIN clause completes.
+
+SQLite does not implement the opposite (RIGHT JOIN), but other DBMSs do.
+
+## Left (right) joins (cont'd)
+
+<img src=images/left_join.png width="65%"/>
+
+## Full outer joins
+
+The result of the FULL OUTER JOIN is a combination of a LEFT JOIN and a RIGHT JOIN. The result set of the full outer join has NULL values for every column of the table that does not have a matching row. For the matching rows, the FULL OUTER JOIN produces a single row with values from columns in the both tables.
+
+Unfortunately, SQLite does not support the FULL OUTER JOIN clause. You can emulate the FULL OUTER JOIN clause using only LEFT JOINs.
+
+## Full outer joins (cont'd)
+
+<img src=images/outer_join.png width="55%"/>
+
+## So much more...
+
+http://www.sqlitetutorial.net
+
+## Your Turn { .cover .white }
+
+<!-- image source https://www.flickr.com/photos/ollemhebb/16691684354/in/photolist-rqZfeh-dB2HGy-j4rtWV-cswQCb-bnmKUX-rurYD7-5vmdw6-7iHPtj-bvggjZ-7nwAyK-oVZdhD-acwkds-dqAf8f-e4z5Jk-6PBenY-dSAYZ9-5vmcGR-e4z7be-cyGrpE-7WLPaw-5vmdnn-8ciEWU-5vmcDa-o2NbGq-dxpJTW-cyGt4d-dZy9Sm-dZssjK-oVZ3SB-5BtrCp-e4z5Mk-6bvjNs-8cfk5H-dzTiW2-7Yfj3T-9mraHV-5XmJTS-aDtnzj-ruXg4M-ecF3x2-aAU6Fg-bsQosb-Hgh9UM-kJti5g-ifdCE4-ceXXhf-7AdkFZ-aEDYpr-otaizi-sa1Phn -->
+<img src="images/your_turn.jpg" class="cover height">
+
+<ol style="color: white">
+<li>Browse the database and try some SELECT statements. Maybe use a WHERE or ORDER BY clause if desired.</li>
+<li>How many customers does this shop have? Employees?</li>
+<li>One album belongs to one artist. However, one artist may have zero or more albums. Find the artists who do not have any albums by using the LEFT JOIN clause.</li>
+<li>It is mentioned that SQLite does not have the RIGHT JOIN or the FULL OUTER JOIN implemented. Create a workaround for the RIGHT JOIN.</li>
+<li>(Challenge) Create a workaround for the FULL OUTER JOIN using LEFT JOINs. Hint: requires <a href="http://www.sqlitetutorial.net/sqlite-union/" style="color: black">UNION</a>.</li>
+</ol>

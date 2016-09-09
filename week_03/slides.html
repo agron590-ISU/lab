@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SQL</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="slides_files/rmdshower/node_modules/shower-ribbon/styles/screen-4x3.css">
+  <link rel="stylesheet" href="slides_files/rmdshower/style-common.css">
+  <link rel="stylesheet" href="slides_files/rmdshower/style-ribbon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+  <script src="slides_files/rmdshower/auto-render.min.js" type="text/javascript"></script>
+  
+  
+    <style type="text/css">
+   div.sourceCode { overflow-x: auto; }
+   table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+     margin: 0; padding: 0; vertical-align: baseline; border: none; }
+   table.sourceCode { width: 100%; line-height: 100%; }
+   td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+   td.sourceCode { padding-left: 5px; }
+   code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+   code > span.dt { color: #902000; } /* DataType */
+   code > span.dv { color: #40a070; } /* DecVal */
+   code > span.bn { color: #40a070; } /* BaseN */
+   code > span.fl { color: #40a070; } /* Float */
+   code > span.ch { color: #4070a0; } /* Char */
+   code > span.st { color: #4070a0; } /* String */
+   code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+   code > span.ot { color: #007020; } /* Other */
+   code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+   code > span.fu { color: #06287e; } /* Function */
+   code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+   code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+   code > span.cn { color: #880000; } /* Constant */
+   code > span.sc { color: #4070a0; } /* SpecialChar */
+   code > span.vs { color: #4070a0; } /* VerbatimString */
+   code > span.ss { color: #bb6688; } /* SpecialString */
+   code > span.im { } /* Import */
+   code > span.va { color: #19177c; } /* Variable */
+   code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+   code > span.op { color: #666666; } /* Operator */
+   code > span.bu { } /* BuiltIn */
+   code > span.ex { } /* Extension */
+   code > span.pp { color: #bc7a00; } /* Preprocessor */
+   code > span.at { color: #7d9029; } /* Attribute */
+   code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+   code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+   code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+   code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  
+  
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>SQL</h1>
+    <p>Ranae Dietzel &amp; Andee Kaplan</p>
+  </header>
+
+    
+  
+<section id="return-of-relational-databases-the-sql" class="titleslide slide level1"><h2 class="shout">Return of Relational Databases: The SQL</h2></section><section id="demo-db---chinook" class="slide level2">
+<h2>Demo DB - chinook</h2>
+<p><img src="images/ChinookDatabaseSchema.png" /></p>
+</section><section id="select" class="slide level2">
+<h2>Select</h2>
+<p>You often use the SELECT statement to query data from one or more table.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span> * 
+<span class="kw">from</span> artist;</code></pre></div>
+<p>Although the SELECT clause appears before the FROM clause, SQLite evaluates the FROM clause first and then the SELECT clause. Thererefore, you can specify a column or a list of comma-separated columns in the SELECT clause.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span> 
+  name, 
+  composer, 
+  unitprice
+<span class="kw">from</span> track;</code></pre></div>
+</section><section id="section" class="slide level2">
+<h2>*</h2>
+<ul>
+<li>For a table with many columns, you can use the asterisk (*), which is the shorthand for all columns of the table.</li>
+<li>You should use the asterisk (*) for the testing purpose only, not in the real application development.</li>
+<li>When you develop an application, you should control what SQLite returns to your application.
+<ul>
+<li>What if somebody deletes a column? Your application could break.</li>
+<li>What if somebody adds a column? More data, slower I/O.</li>
+</ul></li>
+</ul>
+</section><section id="filter" class="slide level2">
+<h2>Filter</h2>
+<p>The WHERE clause is an optional clause of the SELECT statement, appearing after the FROM clause. You add a WHERE clause to the SELECT statement to <strong>filter</strong> data returned by the query.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span> 
+  name, 
+  composer, 
+  unitprice
+<span class="kw">from</span> track
+<span class="kw">where</span> unitprice &gt; <span class="dv">1</span>;</code></pre></div>
+<p>When evaluating a SELECT statement with a WHERE clause, SQLite</p>
+<ol type="1">
+<li>checks the table in the FROM clause.</li>
+<li>evaluates the conditions in the WHERE clause to get the correct rows.</li>
+<li>makes final result from rows in step 2. with columns in the SELECT clause.</li>
+</ol>
+</section><section id="arrange" class="slide level2">
+<h2>Arrange</h2>
+<p>SQLite table stores rows in a table in an unspecified order. If you use the SELECT statement to query data from a table, the order of rows in the result set is unspecified. To sort the result set, you add the ORDER BY clause in the SELECT statement.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span> 
+  name, 
+  composer, 
+  unitprice
+<span class="kw">from</span> track
+<span class="kw">order</span> <span class="kw">by</span> unitprice, milliseconds <span class="kw">desc</span>;</code></pre></div>
+<p>The ORDER BY clause comes after the FROM clause and allows you to sort the result set based on one or more columns in different orders, ascending (ASC) and descending (DESC).</p>
+</section><section id="joins" class="slide level2">
+<h2>Joins</h2>
+<p>In relational databases, data is often distributed in many related tables. A table is associated with another table using foreign keys. To query data from many tables, we will use <strong>joins</strong>.</p>
+<p>There are three types of joins we will focus on:</p>
+<ol type="1">
+<li>inner joins</li>
+<li>left (right) joins</li>
+<li>outer joins</li>
+</ol>
+<p>Each join type combines data in a different way.</p>
+</section><section id="inner-joins" class="slide level2">
+<h2>Inner joins</h2>
+<p>Suppose you have two tables: A and B. A has <code>a1</code>, <code>a2</code>, and <code>f</code> columns. B has <code>b1</code>, <code>b2</code>, and <code>f</code> column. The A table links to the B table using a foreign key column named <code>f</code>.</p>
+<p>For each row in the A table, the INNER JOIN clause compares the value of the <code>f</code> column with the value of the <code>f</code> column in the B table. If the value of the <code>f</code> column in the A table equals the value of the <code>f</code> column in the B table, it combines data from <code>a1</code>, <code>a2</code>, <code>b1</code>, <code>b2</code>, columns and includes this row in the result set.</p>
+<p>In other words, the INNER JOIN clause returns rows from the A table that has the corresponding row in B table (based on the key <code>f</code>).</p>
+</section><section id="inner-joins-contd" class="slide level2">
+<h2>Inner joins (cont’d)</h2>
+<p><img src=images/inner_join.png width="80%"/></p>
+</section><section id="inner-joins-contd-1" class="slide level2">
+<h2>Inner joins (cont’d)</h2>
+<p>Inner joins can be thought of as <em>intersections</em> of rows based on a common key.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span>
+ trackid,
+ name,
+ title
+<span class="kw">from</span>
+ track
+<span class="kw">inner</span> <span class="kw">join</span> album <span class="kw">on</span> album.albumid = track.albumid
+<span class="kw">where</span> unitprice &gt; <span class="dv">1</span>
+<span class="kw">order</span> <span class="kw">by</span> unitprice, milliseconds <span class="kw">desc</span>;</code></pre></div>
+</section><section id="left-right-joins" class="slide level2">
+<h2>Left (right) joins</h2>
+<p>A LEFT JOIN statement returns a result set that includes</p>
+<ol type="1">
+<li>Rows in the A table (left table) that have corresponding rows in the B table.</li>
+<li>Rows in the A table and the rows in the B table filled with NULL values if the row in the A table does not have any corresponding rows in the B table.</li>
+</ol>
+<p>All rows in the A table are included in the result set whether there are matching rows in the B table or not. If you have a WHERE clause in the statement, the search condition in the WHERE clause is applied after the matching of the LEFT JOIN clause completes.</p>
+<p>SQLite does not implement the opposite (RIGHT JOIN), but other DBMSs do.</p>
+</section><section id="left-right-joins-contd" class="slide level2">
+<h2>Left (right) joins (cont’d)</h2>
+<p><img src=images/left_join.png width="65%"/></p>
+</section><section id="full-outer-joins" class="slide level2">
+<h2>Full outer joins</h2>
+<p>The result of the FULL OUTER JOIN is a combination of a LEFT JOIN and a RIGHT JOIN. The result set of the full outer join has NULL values for every column of the table that does not have a matching row. For the matching rows, the FULL OUTER JOIN produces a single row with values from columns in the both tables.</p>
+<p>Unfortunately, SQLite does not support the FULL OUTER JOIN clause. You can emulate the FULL OUTER JOIN clause using only LEFT JOINs.</p>
+</section><section id="full-outer-joins-contd" class="slide level2">
+<h2>Full outer joins (cont’d)</h2>
+<p><img src=images/outer_join.png width="55%"/></p>
+</section><section id="so-much-more" class="slide level2">
+<h2>So much more…</h2>
+<p><a href="http://www.sqlitetutorial.net" class="uri">http://www.sqlitetutorial.net</a></p>
+</section><section id="your-turn" class="slide level2 cover white">
+<h2>Your Turn</h2>
+<!-- image source https://www.flickr.com/photos/ollemhebb/16691684354/in/photolist-rqZfeh-dB2HGy-j4rtWV-cswQCb-bnmKUX-rurYD7-5vmdw6-7iHPtj-bvggjZ-7nwAyK-oVZdhD-acwkds-dqAf8f-e4z5Jk-6PBenY-dSAYZ9-5vmcGR-e4z7be-cyGrpE-7WLPaw-5vmdnn-8ciEWU-5vmcDa-o2NbGq-dxpJTW-cyGt4d-dZy9Sm-dZssjK-oVZ3SB-5BtrCp-e4z5Mk-6bvjNs-8cfk5H-dzTiW2-7Yfj3T-9mraHV-5XmJTS-aDtnzj-ruXg4M-ecF3x2-aAU6Fg-bsQosb-Hgh9UM-kJti5g-ifdCE4-ceXXhf-7AdkFZ-aEDYpr-otaizi-sa1Phn -->
+<p><img src="images/your_turn.jpg" class="cover height"></p>
+<ol style="color: white">
+<li>
+Browse the database and try some SELECT statements. Maybe use a WHERE or ORDER BY clause if desired.
+</li>
+<li>
+How many customers does this shop have? Employees?
+</li>
+<li>
+One album belongs to one artist. However, one artist may have zero or more albums. Find the artists who do not have any albums by using the LEFT JOIN clause.
+</li>
+<li>
+It is mentioned that SQLite does not have the RIGHT JOIN or the FULL OUTER JOIN implemented. Create a workaround for the RIGHT JOIN.
+</li>
+<li>
+(Challenge) Create a workaround for the FULL OUTER JOIN using LEFT JOINs. Hint: requires <a href="http://www.sqlitetutorial.net/sqlite-union/" style="color: black">UNION</a>.
+</li>
+</ol>
+</section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="slides_files/rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+    <script>renderMathInElement(document.body);</script>
+  
+  
+</body>
+</html>
