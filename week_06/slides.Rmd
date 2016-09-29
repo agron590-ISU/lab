@@ -22,6 +22,7 @@ opts_chunk$set(message = FALSE, error = FALSE, warning = FALSE)
 
 - `ggplot2` is an `R` package for statistical graphics built on a **grammar of graphics**, based on [a book](http://www.springer.com/us/book/9780387245447) by Leland Wilkinson.
 - Written by Hadley Wickham, a graduate of the ISU Statistics Department
+- Documentation: http://docs.ggplot2.org/current/
 
 ```{r}
 #install ggplot2 if necessary and load the package
