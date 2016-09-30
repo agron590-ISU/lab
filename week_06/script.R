@@ -1,7 +1,3 @@
-## ----echo=FALSE----------------------------------------------------------
-library(knitr)
-opts_chunk$set(message = FALSE, error = FALSE, warning = FALSE)
-
 ## ------------------------------------------------------------------------
 #install ggplot2 if necessary and load the package
 if(!("ggplot2" %in% installed.packages()[, "Package"])) 
