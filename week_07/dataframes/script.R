@@ -18,9 +18,30 @@ tail(crops)  # BTW, hashtag is used to insert commments
   #Can also specify by column number  
   notsomany_columns<-crops[,c(2, 6, 16 ,17, 20)]
 
-#Let's get rid of some rows
+#Let's get rid of some rows - like everything, there are a lot of ways 
   
   recent<-less_columns[less_columns$Year != 1866, ]
   
-  recent<-less_columns[less_columns$Year %in% c(1867:2015),]
+  recent<-less_columns[less_columns$Year %in% c(1867:2015),]  
+  
+  recent<-less_columns[1:6819,]  
+  
+#Now let's subset soybeans  
+  beans<-recent[recent$Commodity == "SOYBEANS" & recent$Data.Item == "SOYBEANS - YIELD, MEASURED IN BU / ACRE",]  
+  
+#These columns names are driving me crazy  
+  colnames(beans)<-c("year", "state", "commodity", "measure", "bu_acre")  
+  beans<-beans[,-4]
+  
+#I have some class problems
+  beans$bu_acre<-as.numeric(beans$bu_acre)
+  beans$year<-as.numeric(beans$year)  
+  
+#Add a unit conversion  
+  beans$Mg_ha<-beans$bu_acre*60*0.00045*0.40
+  
+mod<-lm(beans$bu_acre ~ beans$year)
+
+summary(mod)
+
   
