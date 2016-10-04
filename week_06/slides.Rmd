@@ -1,0 +1,86 @@
+---
+title: "You're gonna *plotz*!"
+author: "Ranae Dietzel & Andee Kaplan"
+ratio: 16x10
+output:
+  rmdshower::shower_presentation:
+    self_contained: false
+    katex: true
+    theme: ribbon
+---
+
+```{r echo=FALSE}
+library(knitr)
+opts_chunk$set(message = FALSE, error = FALSE, warning = FALSE)
+```
+
+## You're gonna *plotz*!
+
+![](images/plotz.png)
+
+## `ggplot2`
+
+- `ggplot2` is an `R` package for statistical graphics built on a **grammar of graphics**, based on [a book](http://www.springer.com/us/book/9780387245447) by Leland Wilkinson.
+- Written by Hadley Wickham, a graduate of the ISU Statistics Department
+- Documentation: http://docs.ggplot2.org/current/
+
+```{r}
+#install ggplot2 if necessary and load the package
+if(!("ggplot2" %in% installed.packages()[, "Package"])) 
+  install.packages("ggplot2")
+
+library(ggplot2)
+```
+
+## Histogram
+
+```{r}
+#histogram
+qplot(data = diamonds, price)
+```
+
+## Scatter plot
+
+```{r}
+#scatter plot
+qplot(data = diamonds, carat, price)
+```
+
+## Boxplot
+
+```{r}
+#boxplot
+qplot(data = diamonds, color, price, geom = "boxplot")
+```
+
+## Adding color
+
+```{r}
+#add color
+qplot(data = diamonds, carat, price, colour = color)
+```
+
+## Faceting
+
+```{r}
+#faceting
+qplot(data = diamonds, price, 
+      geom = "histogram", binwidth = 25, facets = .~color)
+```
+
+## Your Turn { .cover .white }
+
+<!-- image source https://www.flickr.com/photos/ollemhebb/16691684354/in/photolist-rqZfeh-dB2HGy-j4rtWV-cswQCb-bnmKUX-rurYD7-5vmdw6-7iHPtj-bvggjZ-7nwAyK-oVZdhD-acwkds-dqAf8f-e4z5Jk-6PBenY-dSAYZ9-5vmcGR-e4z7be-cyGrpE-7WLPaw-5vmdnn-8ciEWU-5vmcDa-o2NbGq-dxpJTW-cyGt4d-dZy9Sm-dZssjK-oVZ3SB-5BtrCp-e4z5Mk-6bvjNs-8cfk5H-dzTiW2-7Yfj3T-9mraHV-5XmJTS-aDtnzj-ruXg4M-ecF3x2-aAU6Fg-bsQosb-Hgh9UM-kJti5g-ifdCE4-ceXXhf-7AdkFZ-aEDYpr-otaizi-sa1Phn -->
+<img src="images/your_turn.jpg" class="cover height">
+
+<p style="color: white">
+You will use the `mpg` dataset for all questions below.
+</p>
+
+<ol style="color:white">
+<li>Make a histogram of highway gas mileage.</li>
+<li>Look at the distribution (histogram) of highway gas mileage by vehicle class.</li>
+<li>Make a plot to look at the relationship between city and highway gas mileage.</li>
+<li>Color your relationship plot by number of cylinders.</li>
+<li>What is the distribution of city gas mileage by manufaturer? Try a boxplot.</li>
+</ol>

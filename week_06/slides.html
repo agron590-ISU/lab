@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>You’re gonna plotz!</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="slides_files/rmdshower/node_modules/shower-ribbon/styles/screen-4x3.css">
+  <link rel="stylesheet" href="slides_files/rmdshower/style-common.css">
+  <link rel="stylesheet" href="slides_files/rmdshower/style-ribbon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+  <script src="slides_files/rmdshower/auto-render.min.js" type="text/javascript"></script>
+  
+  
+    <style type="text/css">
+   div.sourceCode { overflow-x: auto; }
+   table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+     margin: 0; padding: 0; vertical-align: baseline; border: none; }
+   table.sourceCode { width: 100%; line-height: 100%; }
+   td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+   td.sourceCode { padding-left: 5px; }
+   code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+   code > span.dt { color: #902000; } /* DataType */
+   code > span.dv { color: #40a070; } /* DecVal */
+   code > span.bn { color: #40a070; } /* BaseN */
+   code > span.fl { color: #40a070; } /* Float */
+   code > span.ch { color: #4070a0; } /* Char */
+   code > span.st { color: #4070a0; } /* String */
+   code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+   code > span.ot { color: #007020; } /* Other */
+   code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+   code > span.fu { color: #06287e; } /* Function */
+   code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+   code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+   code > span.cn { color: #880000; } /* Constant */
+   code > span.sc { color: #4070a0; } /* SpecialChar */
+   code > span.vs { color: #4070a0; } /* VerbatimString */
+   code > span.ss { color: #bb6688; } /* SpecialString */
+   code > span.im { } /* Import */
+   code > span.va { color: #19177c; } /* Variable */
+   code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+   code > span.op { color: #666666; } /* Operator */
+   code > span.bu { } /* BuiltIn */
+   code > span.ex { } /* Extension */
+   code > span.pp { color: #bc7a00; } /* Preprocessor */
+   code > span.at { color: #7d9029; } /* Attribute */
+   code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+   code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+   code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+   code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  
+  
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>You’re gonna plotz!</h1>
+    <p>Ranae Dietzel &amp; Andee Kaplan</p>
+  </header>
+
+    
+  
+<section id="youre-gonna-plotz" class="slide level2">
+<h2>You’re gonna <em>plotz</em>!</h2>
+<p><img src="images/plotz.png" /></p>
+</section>
+<section id="ggplot2" class="slide level2">
+<h2><code>ggplot2</code></h2>
+<ul>
+<li><code>ggplot2</code> is an <code>R</code> package for statistical graphics built on a <strong>grammar of graphics</strong>, based on <a href="http://www.springer.com/us/book/9780387245447">a book</a> by Leland Wilkinson.</li>
+<li>Written by Hadley Wickham, a graduate of the ISU Statistics Department</li>
+<li>Documentation: <a href="http://docs.ggplot2.org/current/" class="uri">http://docs.ggplot2.org/current/</a></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install ggplot2 if necessary and load the package</span>
+if(!(<span class="st">&quot;ggplot2&quot;</span> %in%<span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="st">&quot;Package&quot;</span>])) 
+  <span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)
+
+<span class="kw">library</span>(ggplot2)</code></pre></div>
+</section>
+<section id="histogram" class="slide level2">
+<h2>Histogram</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#histogram</span>
+<span class="kw">qplot</span>(<span class="dt">data =</span> diamonds, price)</code></pre></div>
+<p><img src="slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" /></p>
+</section>
+<section id="scatter-plot" class="slide level2">
+<h2>Scatter plot</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#scatter plot</span>
+<span class="kw">qplot</span>(<span class="dt">data =</span> diamonds, carat, price)</code></pre></div>
+<p><img src="slides_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" /></p>
+</section>
+<section id="boxplot" class="slide level2">
+<h2>Boxplot</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#boxplot</span>
+<span class="kw">qplot</span>(<span class="dt">data =</span> diamonds, color, price, <span class="dt">geom =</span> <span class="st">&quot;boxplot&quot;</span>)</code></pre></div>
+<p><img src="slides_files/figure-revealjs/unnamed-chunk-5-1.png" width="768" /></p>
+</section>
+<section id="adding-color" class="slide level2">
+<h2>Adding color</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#add color</span>
+<span class="kw">qplot</span>(<span class="dt">data =</span> diamonds, carat, price, <span class="dt">colour =</span> color)</code></pre></div>
+<p><img src="slides_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /></p>
+</section>
+<section id="faceting" class="slide level2">
+<h2>Faceting</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#faceting</span>
+<span class="kw">qplot</span>(<span class="dt">data =</span> diamonds, price, 
+      <span class="dt">geom =</span> <span class="st">&quot;histogram&quot;</span>, <span class="dt">binwidth =</span> <span class="dv">25</span>, <span class="dt">facets =</span> .~color)</code></pre></div>
+<p><img src="slides_files/figure-revealjs/unnamed-chunk-7-1.png" width="768" /></p>
+</section>
+<section id="your-turn" class="slide level2 cover white">
+<h2>Your Turn</h2>
+<!-- image source https://www.flickr.com/photos/ollemhebb/16691684354/in/photolist-rqZfeh-dB2HGy-j4rtWV-cswQCb-bnmKUX-rurYD7-5vmdw6-7iHPtj-bvggjZ-7nwAyK-oVZdhD-acwkds-dqAf8f-e4z5Jk-6PBenY-dSAYZ9-5vmcGR-e4z7be-cyGrpE-7WLPaw-5vmdnn-8ciEWU-5vmcDa-o2NbGq-dxpJTW-cyGt4d-dZy9Sm-dZssjK-oVZ3SB-5BtrCp-e4z5Mk-6bvjNs-8cfk5H-dzTiW2-7Yfj3T-9mraHV-5XmJTS-aDtnzj-ruXg4M-ecF3x2-aAU6Fg-bsQosb-Hgh9UM-kJti5g-ifdCE4-ceXXhf-7AdkFZ-aEDYpr-otaizi-sa1Phn -->
+<p><img src="images/your_turn.jpg" class="cover height"></p>
+<p style="color: white">
+You will use the <code>mpg</code> dataset for all questions below.
+</p>
+<ol style="color:white">
+<li>
+Make a histogram of highway gas mileage.
+</li>
+<li>
+Look at the distribution (histogram) of highway gas mileage by vehicle class.
+</li>
+<li>
+Make a plot to look at the relationship between city and highway gas mileage.
+</li>
+<li>
+Color your relationship plot by number of cylinders.
+</li>
+<li>
+What is the distribution of city gas mileage by manufaturer? Try a boxplot.
+</li>
+</ol>
+</section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="slides_files/rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+    <script>renderMathInElement(document.body);</script>
+  
+  
+</body>
+</html>
