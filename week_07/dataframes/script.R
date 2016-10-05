@@ -1,7 +1,7 @@
 getwd()
 setwd()
 
-crops<-read.csv("NASS-Iowa.csv")  #ctr+enter will run the line you are on  
+crops<-read.csv("NASS-Iowa.csv", stringsAsFactors=FALSE)  #ctr+enter will run the line you are on  
 
 head(crops)  #I like to glance at the data
 tail(crops)  # BTW, hashtag is used to insert commments
@@ -39,9 +39,37 @@ tail(crops)  # BTW, hashtag is used to insert commments
   
 #Add a unit conversion  
   beans$Mg_ha<-beans$bu_acre*60*0.00045*0.40
-  
+ 
+#Fit a linear model 
 mod<-lm(beans$bu_acre ~ beans$year)
 
+#Look at the summary
 summary(mod)
 
-  
+#Look at names of things the model gives us
+names(summary(mod))
+
+#What does it mean by "coefficients"?
+summary(mod)$coefficients
+
+#Extract the p-value
+summary(mod)$coefficients[,4] 
+
+#Extract the r squared
+summary(mod)$r.squared
+
+#Something that was extracted being useful
+library(ggplot2)
+
+ggplot(beans, aes(x=year, y=bu_acre))+
+  geom_point()+
+  geom_smooth(method='lm')+
+  annotate("text", x=1940, y=50, label = summary(mod)$r.squared, size=5, parse=TRUE)  
+
+#More subsetting  
+
+smlgrains<-less_columns[less_columns$Commodity %in% c("OATS", "BARLEY", "WHEAT", "RYE") & 
+                          less_columns$Data.Item %in% c("OATS - ACRES HARVESTED","BARLEY - ACRES HARVESTED",
+                                                       "WHEAT - ACRES HARVESTED","RYE - ACRES HARVESTED"),]
+
+smlgrains$Value<-as.numeric(as.character(smlgrains$Value))
