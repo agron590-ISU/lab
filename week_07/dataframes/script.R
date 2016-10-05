@@ -1,7 +1,8 @@
 getwd()
 setwd()
 
-crops<-read.csv("NASS-Iowa.csv", stringsAsFactors=FALSE)  #ctr+enter will run the line you are on  
+library(readr) 
+crops<-read_csv("NASS-Iowa.csv")  #ctr+enter will run the line you are on 
 
 head(crops)  #I like to glance at the data
 tail(crops)  # BTW, hashtag is used to insert commments
@@ -72,4 +73,8 @@ smlgrains<-less_columns[less_columns$Commodity %in% c("OATS", "BARLEY", "WHEAT",
                           less_columns$Data.Item %in% c("OATS - ACRES HARVESTED","BARLEY - ACRES HARVESTED",
                                                        "WHEAT - ACRES HARVESTED","RYE - ACRES HARVESTED"),]
 
-smlgrains$Value<-as.numeric(as.character(smlgrains$Value))
+smlgrains$Value<-as.numeric(smlgrains$Value)
+
+total_smlgrains<-group_by(smlgrains, Year)%>%
+  summarise(total=sum(Value))
+  
