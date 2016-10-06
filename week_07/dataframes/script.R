@@ -1,5 +1,10 @@
+#This script is meant to illustrate subsetting and does not necessarily demostrate the most efficient coding
+#practices. Here we import a dataset from National Agricultural Statitistics Service 
+#(NASS, https://quickstats.nass.usda.gov/) that focuses on field crops in Iowa.
+
+#Use this to check and set your working directory (or toolbar in RStudio)
 getwd()
-setwd()
+#setwd()
 
 library(readr) 
 crops<-read_csv("NASS-Iowa.csv")  #ctr+enter or command+enter will run the line you are on 
@@ -52,7 +57,7 @@ summary(mod)$coefficients[,4]
 #Extract the R squared
 summary(mod)$r.squared
 
-#Here is something that was extracted being useful
+#Here is something that was extracted (R^2) being useful
 library(ggplot2)
 
 ggplot(beans, aes(x=year, y=bu_acre))+
@@ -90,7 +95,7 @@ mod<-lmList(bu_acre ~ year | era, data=corn)
 #And here we extract the actual slopes
 coef(mod)[2]
 
-#To determine if the slope are actually different, we would need STATISTICS
+#To determine if the slopes are actually different, we would need STATISTICS
 
 #######################################################
 #Now we want to look at small grains as a group
