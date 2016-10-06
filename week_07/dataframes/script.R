@@ -60,9 +60,37 @@ ggplot(beans, aes(x=year, y=bu_acre))+
   geom_smooth(method='lm')+
   annotate("text", x=1940, y=50, label = summary(mod)$r.squared, size=5, parse=TRUE)
 
+
 #######################################################
+#Now let's subset grain corn, just bushels per acre  
+corn<-recent[recent$Commodity == "CORN" & 
+                recent$`Data Item` == "CORN, GRAIN - YIELD, MEASURED IN BU / ACRE",]  
+
+#These columns names are driving me crazy, let's rename  
+colnames(corn)<-c("year", "state", "commodity", "measure", "bu_acre")  
+corn<-corn[,-4] #We don't even need this column, let's remove  
+
+ggplot(corn, aes(x=year, y=bu_acre))+
+  geom_point()
+
+#Let's add a column to define "prehybrid", "old" and "new" era corn
+corn$era[corn$year %in% c(1867:1940)]<-"prehybrid"
+corn$era[corn$year %in% c(1941:1990)]<-"old"
+corn$era[corn$year %in% c(1991:2015)]<-"new"
+
+ggplot(corn, aes(x=year, y=bu_acre, group=era, color=era))+
+  geom_point()+
+  geom_smooth(method=lm)
 
 
+####Fit lines to the data and look at the differences in slopes  
+library(nlme) #We'll need this for a minute (lmList)
+mod<-lmList(bu_acre ~ year | era, data=corn)
+
+#And here we extract the actual slopes
+coef(mod)[2]
+
+#To determine if the slope are actually different, we would need STATISTICS
 
 #######################################################
 #Now we want to look at small grains as a group
@@ -101,11 +129,11 @@ colnames(bean_acres)<-c("year", "acres")
   #have to have SOYBEANS shouted at us
 bean_acres$crop<-"soybeans" 
 
-#Make matching column names and "crop" label   
+#Make matching column names and "crop" label for total_smlgrains  
 colnames(total_smlgrains)<- c("year", "acres")
 total_smlgrains$crop<-"smlgrains"
 
-#Now, R, bind these rows together
+#Now, R, bind these rows together (rbind)
 both<-rbind(bean_acres, total_smlgrains)
 
 #Here's a story about cropland use in Iowa
