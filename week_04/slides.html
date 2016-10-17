@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 3.5 - MOAR SQL</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="slides_files/rmdshower/node_modules/shower-ribbon/styles/screen-4x3.css">
+  <link rel="stylesheet" href="slides_files/rmdshower/style-common.css">
+  <link rel="stylesheet" href="slides_files/rmdshower/style-ribbon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+  <script src="slides_files/rmdshower/auto-render.min.js" type="text/javascript"></script>
+  
+  
+    <style type="text/css">
+   div.sourceCode { overflow-x: auto; }
+   table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+     margin: 0; padding: 0; vertical-align: baseline; border: none; }
+   table.sourceCode { width: 100%; line-height: 100%; }
+   td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+   td.sourceCode { padding-left: 5px; }
+   code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+   code > span.dt { color: #902000; } /* DataType */
+   code > span.dv { color: #40a070; } /* DecVal */
+   code > span.bn { color: #40a070; } /* BaseN */
+   code > span.fl { color: #40a070; } /* Float */
+   code > span.ch { color: #4070a0; } /* Char */
+   code > span.st { color: #4070a0; } /* String */
+   code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+   code > span.ot { color: #007020; } /* Other */
+   code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+   code > span.fu { color: #06287e; } /* Function */
+   code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+   code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+   code > span.cn { color: #880000; } /* Constant */
+   code > span.sc { color: #4070a0; } /* SpecialChar */
+   code > span.vs { color: #4070a0; } /* VerbatimString */
+   code > span.ss { color: #bb6688; } /* SpecialString */
+   code > span.im { } /* Import */
+   code > span.va { color: #19177c; } /* Variable */
+   code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+   code > span.op { color: #666666; } /* Operator */
+   code > span.bu { } /* BuiltIn */
+   code > span.ex { } /* Extension */
+   code > span.pp { color: #bc7a00; } /* Preprocessor */
+   code > span.at { color: #7d9029; } /* Attribute */
+   code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+   code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+   code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+   code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  
+  
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>Lab 3.5 - MOAR SQL</h1>
+    <p>Ranae Dietzel &amp; Andee Kaplan</p>
+  </header>
+
+    
+  
+<section id="lab-3.5---moar-sql" class="titleslide slide level1"><h2 class="shout">Lab 3.5 - MOAR SQL</h2></section><section id="commands-you-may-need" class="slide level2">
+<h2>Commands you may need</h2>
+<ul>
+<li><strong>Aggregate functions:</strong> can be used in the select query to summarise results.
+<ul>
+<li><code>select count(1) ...</code> counts the number of rows in the result set</li>
+<li><code>select sum(var) ...</code> sums value of <code>var</code> for rows in the result</li>
+<li><code>select max(var) ...</code> returns max of <code>var</code> for rows in the result</li>
+</ul></li>
+<li><strong>Group by:</strong> returns one row for each group. For each group, you can apply an aggregate function.<br />
+<code>select group, aggregate(variable) ... group by group</code></li>
+<li><strong>Distinct:</strong> allows you to remove the duplicate rows in the result set.<br />
+<code>select distinct columns ...</code></li>
+</ul>
+</section><section id="subqueries" class="slide level2">
+<h2>Subqueries</h2>
+<p>A subquery is a SELECT statement nested in another statement.</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span> trackid,
+       name,
+       albumid
+<span class="kw">from</span> track
+<span class="kw">where</span> albumid = (
+                     <span class="kw">select</span> albumid
+                     <span class="kw">from</span> album
+                     <span class="kw">where</span> title = <span class="st">&#39;Nevermind&#39;</span>
+                 );</code></pre></div>
+<p>Here, <code>select albumid from album where title = 'Nevermind'</code> is the subquery that lets us grab the albumid for Nirvana’s Nevermind album.</p>
+</section><section id="your-turn" class="slide level2 cover white">
+<h2>Your Turn</h2>
+<!-- image source https://www.flickr.com/photos/ollemhebb/16691684354/in/photolist-rqZfeh-dB2HGy-j4rtWV-cswQCb-bnmKUX-rurYD7-5vmdw6-7iHPtj-bvggjZ-7nwAyK-oVZdhD-acwkds-dqAf8f-e4z5Jk-6PBenY-dSAYZ9-5vmcGR-e4z7be-cyGrpE-7WLPaw-5vmdnn-8ciEWU-5vmcDa-o2NbGq-dxpJTW-cyGt4d-dZy9Sm-dZssjK-oVZ3SB-5BtrCp-e4z5Mk-6bvjNs-8cfk5H-dzTiW2-7Yfj3T-9mraHV-5XmJTS-aDtnzj-ruXg4M-ecF3x2-aAU6Fg-bsQosb-Hgh9UM-kJti5g-ifdCE4-ceXXhf-7AdkFZ-aEDYpr-otaizi-sa1Phn -->
+<p><img src="images/your_turn.jpg" class="cover height"></p>
+<p style="color: white">
+Continue working with the Chinook database to answer the following questions. For reference, <a href="http://www.sqlitetutorial.net/" style="color:black">http://www.sqlitetutorial.net/</a>
+</p>
+<ol style="color: white">
+<li>
+Which artists did not make any albums at all?
+</li>
+<li>
+Which artist has the most albums?
+</li>
+<li>
+Which video track has the longest length?
+</li>
+<li>
+How many distinct customers purchased audio tracks from each country? How many audio tracks did they purchase and what was the total price (by country)?
+</li>
+<li>
+Find the names of customers who live in the same city as the top employee in the hierarchy. What about the same country?
+</li>
+</ol>
+</section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="slides_files/rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+    <script>renderMathInElement(document.body);</script>
+  
+  
+</body>
+</html>
