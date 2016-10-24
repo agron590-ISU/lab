@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Layers</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="slides_layers_files/rmdshower/node_modules/shower-ribbon/styles/screen-4x3.css">
+  <link rel="stylesheet" href="slides_layers_files/rmdshower/style-common.css">
+  <link rel="stylesheet" href="slides_layers_files/rmdshower/style-ribbon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+  <script src="slides_layers_files/rmdshower/auto-render.min.js" type="text/javascript"></script>
+  
+  
+    <style type="text/css">
+   div.sourceCode { overflow-x: auto; }
+   table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+     margin: 0; padding: 0; vertical-align: baseline; border: none; }
+   table.sourceCode { width: 100%; line-height: 100%; }
+   td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+   td.sourceCode { padding-left: 5px; }
+   code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+   code > span.dt { color: #902000; } /* DataType */
+   code > span.dv { color: #40a070; } /* DecVal */
+   code > span.bn { color: #40a070; } /* BaseN */
+   code > span.fl { color: #40a070; } /* Float */
+   code > span.ch { color: #4070a0; } /* Char */
+   code > span.st { color: #4070a0; } /* String */
+   code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+   code > span.ot { color: #007020; } /* Other */
+   code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+   code > span.fu { color: #06287e; } /* Function */
+   code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+   code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+   code > span.cn { color: #880000; } /* Constant */
+   code > span.sc { color: #4070a0; } /* SpecialChar */
+   code > span.vs { color: #4070a0; } /* VerbatimString */
+   code > span.ss { color: #bb6688; } /* SpecialString */
+   code > span.im { } /* Import */
+   code > span.va { color: #19177c; } /* Variable */
+   code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+   code > span.op { color: #666666; } /* Operator */
+   code > span.bu { } /* BuiltIn */
+   code > span.ex { } /* Extension */
+   code > span.pp { color: #bc7a00; } /* Preprocessor */
+   code > span.at { color: #7d9029; } /* Attribute */
+   code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+   code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+   code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+   code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  
+  
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>Layers</h1>
+    <p>Ranae Dietzel and Andee Kaplan</p>
+  </header>
+
+    
+  
+<section id="what-is-a-layer" class="slide level2">
+<h2>What is a Layer?</h2>
+<p>A layer added <code>ggplot()</code> can be a geom…</p>
+<ul>
+<li>The type of geometric object</li>
+<li>The statistic mapped to that object</li>
+<li>The data set from which to obtain the statistic</li>
+</ul>
+<p>… or a position adjustment to the scales</p>
+<ul>
+<li>Changing the axes scale</li>
+<li>Changing the color gradient</li>
+</ul>
+</section>
+<section id="layer-examples" class="slide level2">
+<h2>Layer Examples</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Plot</th>
+<th style="text-align: left;">Geom</th>
+<th style="text-align: left;">Stat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Scatterplot</td>
+<td style="text-align: left;">point</td>
+<td style="text-align: left;">identity</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Histogram</td>
+<td style="text-align: left;">bar</td>
+<td style="text-align: left;">bin count</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Smoother</td>
+<td style="text-align: left;">line + ribbon</td>
+<td style="text-align: left;">smoother function</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Binned Scatterplot</td>
+<td style="text-align: left;">rectangle + color</td>
+<td style="text-align: left;">2d bin count</td>
+</tr>
+</tbody>
+</table>
+<p>More geoms described at <a href="http://docs.ggplot2.org/current/" class="uri">http://docs.ggplot2.org/current/</a></p>
+</section>
+<section id="piecing-things-together" class="slide level2">
+<h2>Piecing Things Together</h2>
+<p>Want to build a map using NOAA data</p>
+<ul>
+<li>Coordinate system (mapping Long-Lat to X-Y)</li>
+<li>Add layer of state outlines</li>
+<li>Add layer of points for float locations</li>
+<li>Add layers for Oil Rig marker and label</li>
+<li>Adjust the range of x and y scales</li>
+</ul>
+</section>
+<section id="the-result" class="slide level2">
+<h2>The Result</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +
+<span class="st">    </span><span class="kw">geom_path</span>(<span class="dt">data =</span> states, <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">group =</span> group)) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">data =</span> floats, <span class="kw">aes</span>(<span class="dt">x =</span> Longitude, <span class="dt">y =</span> Latitude, <span class="dt">colour =</span> callSign)) +<span class="st">   </span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(x, y), <span class="dt">shape =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">data =</span> rig) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(x, y), <span class="dt">label =</span> <span class="st">&quot;BP Oil Rig&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">data =</span> rig, <span class="dt">hjust =</span> -<span class="fl">0.1</span>) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">xlim</span>(<span class="kw">c</span>(-<span class="dv">91</span>, -<span class="dv">80</span>)) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">22</span>, <span class="dv">32</span>)) +<span class="st"> </span><span class="kw">coord_map</span>()</code></pre></div>
+<p><img src="slides_layers_files/figure-revealjs/unnamed-chunk-2-1.png" width="672" /></p>
+</section>
+<section id="your-turn" class="slide level2 cover white">
+<h2>Your turn</h2>
+<p><img src="images/your_turn.jpg" class="cover height" /></p>
+<ol style="color: white">
+<li>
+Read in the animal.csv data:
+</li>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animal &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://heike.github.io/rwrks/02-r-graphics/data/animal.csv&quot;</span>)</code></pre></div>
+<li>
+Plot the location of animal sightings on a map of the region
+</li>
+<li>
+On this plot, try to color points by class of animal and/or status of animal
+</li>
+</ol>
+</section>
+<section id="ggplot-is-pipeable" class="slide level2">
+<h2><code>ggplot</code> is pipeable!</h2>
+<p>We can pass data as the first argument to <code>ggplot()</code>… meaning we can <strong>pipe</strong> to it!</p>
+<p><img src="images/shimmy.gif" /></p>
+</section>
+<section id="tidyverse-ftw" class="slide level2">
+<h2>Tidyverse FTW</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">data</span>(baseball, <span class="dt">package=</span><span class="st">&quot;plyr&quot;</span>)
+
+baseball %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(ab &gt;<span class="st"> </span><span class="dv">0</span>) %&gt;%<span class="st"> </span><span class="co">#only players that have ever had an at bat</span>
+<span class="st">  </span><span class="kw">group_by</span>(year) %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ba =</span> h/ab,
+         <span class="dt">mean_ba =</span> <span class="kw">mean</span>(h/ab)) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>() +
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(year, ba), <span class="dt">alpha =</span> .<span class="dv">1</span>) +
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(year, mean_ba), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="slides_layers_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" height="250px" /></p>
+</section>
+<section id="french-fries" class="slide level2">
+<h2>French fries</h2>
+<p>During a ten week sensory experiment, 12 individuals were asked to assess taste of french fries on several scales (how potato-y, buttery, grassy, rancid, paint-y do the fries taste?)</p>
+<p>French fries were fried in one of three different oils, and each week individuals had to assess six batches of french fries (all three oils, replicated twice)</p>
+</section>
+<section id="your-turn-1" class="slide level2 cover white">
+<h2>Your turn</h2>
+<p><img src="images/your_turn.jpg" class="cover height" /></p>
+<p style="color:white">
+Using the <code>tidyverse</code>,
+</p>
+<ol style="color: white">
+<li>
+Read in the french fry data:
+</li>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ff &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://heike.github.io/rwrks/03-r-format/data/frenchfries.csv&quot;</span>)</code></pre></div>
+<li>
+Change it from wide data to tall data (tidy-fy)
+</li>
+<li>
+Create boxplots of the values for each scale.
+</li>
+<li>
+<b>Bonus:</b> Facet by the oils
+</li>
+</ol>
+</section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="slides_layers_files/rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+    <script>renderMathInElement(document.body);</script>
+  
+  
+</body>
+</html>
