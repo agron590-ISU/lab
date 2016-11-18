@@ -1,0 +1,48 @@
+---
+title: "Web scraping"
+author: "Ranae Dietzel and Andee Kaplan"
+ratio: 16x10
+output:
+  rmdshower::shower_presentation:
+    self_contained: false
+    katex: true
+    theme: ribbon
+---
+## Don't abuse your power
+
+- If you scrape a website, please read the terms and conditions!!
+- It’s sometimes more efficient/appropriate to find the API.
+- If a website public offers an API, USE IT (instead of scraping)!!!
+
+http://www.wired.com/2014/01/how-to-hack-okcupid
+http://www.vox.com/2016/5/12/11666116/70000-okcupid-users-data-release
+
+## Let's scrape some data!
+
+We're going to scrape the open access journal "Agronomy" for papers about nitrogen and get some information from them:
+
+1. Title
+2. Authors
+3. Year
+4. Tables
+
+## Your turn { .cover .white }
+
+<img src="images/your_turn.jpg" class="cover height" />
+
+<p style="color:white">
+Open up the lab script and get going! Here are some helpful function names from `rvest`:
+</p>
+
+<ul style="color:white">
+<li>`read_html`</li>
+<li>`html_nodes`</li>
+<li>`html_text`</li>
+<li>`html_table`</li>
+</ul>
+
+<p style="color:white">
+<a style="color:black" href='https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb' target=_blank>SelectorGadget</a> may also be helpful.
+</p>
+
+
