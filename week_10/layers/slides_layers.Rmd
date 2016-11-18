@@ -1,0 +1,123 @@
+---
+title: "Layers"
+author: "Ranae Dietzel and Andee Kaplan"
+ratio: 16x10
+output:
+  rmdshower::shower_presentation:
+    self_contained: false
+    katex: true
+    theme: ribbon
+---
+```{r, echo=FALSE}
+library(ggplot2)
+library(maps)
+
+states <- map_data("state")
+load("data/noaa.rdata")
+```
+
+## What is a Layer?
+
+A layer added `ggplot()` can be a geom...
+
+- The type of geometric object
+- The statistic mapped to that object
+- The data set from which to obtain the statistic
+
+... or a position adjustment to the scales
+
+- Changing the axes scale
+- Changing the color gradient
+
+## Layer Examples
+
+Plot               Geom              Stat
+------------------ ----------------- -----------------
+Scatterplot        point             identity
+Histogram          bar               bin count
+Smoother           line + ribbon     smoother function
+Binned Scatterplot rectangle + color 2d bin count
+
+More geoms described at http://docs.ggplot2.org/current/
+
+## Piecing Things Together
+
+Want to build a map using NOAA data
+
+- Coordinate system (mapping Long-Lat to X-Y)
+- Add layer of state outlines
+- Add layer of points for float locations
+- Add layers for Oil Rig marker and label
+- Adjust the range of x and y scales
+
+## The Result
+
+```{r, fig.height=3, fig.width=7, warning=FALSE}
+ggplot() +
+    geom_path(data = states, aes(x = long, y = lat, group = group)) + 
+    geom_point(data = floats, aes(x = Longitude, y = Latitude, colour = callSign)) +   
+    geom_point(aes(x, y), shape = "x", size = 5, data = rig) + 
+    geom_text(aes(x, y), label = "BP Oil Rig", size = 5, data = rig, hjust = -0.1) + 
+    xlim(c(-91, -80)) + 
+    ylim(c(22, 32)) + coord_map()
+```
+
+## Your turn { .cover .white }
+
+<img src="images/your_turn.jpg" class="cover height" />
+
+<ol style="color: white">
+<li>Read in the animal.csv data:</li>
+
+```{r}
+animal <- read.csv("http://heike.github.io/rwrks/02-r-graphics/data/animal.csv")
+```
+
+<li>Plot the location of animal sightings on a map of the region</li>
+<li>On this plot, try to color points by class of animal and/or status of animal</li>
+</ol>
+
+## `ggplot` is pipeable!
+
+We can pass data as the first argument to `ggplot()`... meaning we can **pipe** to it!
+
+![](images/shimmy.gif)
+
+## Tidyverse FTW
+
+```{r, message=FALSE, out.height="250px"}
+library(tidyverse)
+data(baseball, package="plyr")
+
+baseball %>%
+  filter(ab > 0) %>% #only players that have ever had an at bat
+  group_by(year) %>%
+  mutate(ba = h/ab,
+         mean_ba = mean(h/ab)) %>%
+  ggplot() +
+  geom_point(aes(year, ba), alpha = .1) +
+  geom_line(aes(year, mean_ba), colour = "blue")
+```
+
+## French fries
+
+During a ten week sensory experiment, 12 individuals were asked to assess taste of french fries on several scales (how potato-y, buttery, grassy, rancid, paint-y do the fries taste?)
+
+French fries were fried in one of three different oils, and each week individuals had to assess six batches of french fries (all three oils, replicated twice)
+
+## Your turn { .cover .white }
+
+<img src="images/your_turn.jpg" class="cover height" />
+
+<p style="color:white">Using the `tidyverse`,</p>
+<ol style="color: white">
+<li>Read in the french fry data:</li>
+
+```{r}
+ff <- read.csv("http://heike.github.io/rwrks/03-r-format/data/frenchfries.csv")
+```
+
+<li>Change it from wide data to tall data (tidy-fy)</li>
+<li>Create boxplots of the values for each scale.</li>
+<li><b>Bonus:</b> Facet by the oils</li>
+</ol>
